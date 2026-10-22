@@ -1,0 +1,96 @@
+// let retryCount = 2; // Số lần đã thử hiện tại là 2
+
+// // --- Lần lỗi thứ nhất ---
+// let currentAttempt = retryCount; // 1. Lưu lại: Khách hàng đang ở lần thử thứ 2
+// retryCount = retryCount + 1;     // 2. Tự động tăng số lần thử lên 3 cho lượt sau
+// console.log(`Thông báo: Thanh toán thất bại lần ${currentAttempt}. Hệ thống đang thử lại...`);
+
+// // --- Lần lỗi thứ hai ---
+// retryCount = retryCount + 1;     // 1. Tăng số lần thử lên thành 4
+// let nextAttempt = retryCount;    // 2. Lưu lại: Lần thử tiếp theo sẽ là lần thứ 4
+// console.log(`Cảnh báo: Vẫn thất bại. Đây là lần thử thứ ${nextAttempt}.`);
+
+// // --- Kiểm tra xem có được bấm tiếp không ---
+// let canRetrySubmit = retryCount > 3; // 1. Kiểm tra: 4 lần > 3 lần cho phép đúng không? -> Đúng (True)
+// retryCount = retryCount - 1;         // 2. Hoàn tác/Trừ bớt 1 lượt hệ thống tự thử để trả về số lượt thực tế của người dùng.
+
+// if (canRetrySubmit) {
+//     console.log("Hệ thống thông báo: Đã vượt quá số lần thử cho phép! Khóa nút Submit.");
+//     // Kích hoạt hàm khóa nút bấm ở đây dễ dàng
+// }
+
+// // fix
+
+// // BAN ĐẦU: Khách hàng chưa bấm nút lần nào
+// let retryCount = 0; 
+// const MAX_RETRIES = 3; // Giới hạn tối đa cho phép
+
+// console.log("--- BẮT ĐẦU HỆ THỐNG THANH TOÁN ---");
+
+// // ==========================================
+// // LẦN BẤM THỨ 1: Bị lỗi mạng
+// // ==========================================
+// retryCount = retryCount + 1; // Tăng lên thành 1
+// console.log(`Thông báo: Thất bại lần ${retryCount}. Đang thử lại...`); 
+// // Màn hình in: Thất bại lần 1.
+
+
+// // ==========================================
+// // LẦN BẤM THỨ 2: Vẫn bị lỗi
+// // ==========================================
+// retryCount = retryCount + 1; // Tăng lên thành 2
+// console.log(`Thông báo: Thất bại lần ${retryCount}. Đang thử lại...`); 
+// // Màn hình in: Thất bại lần 2.
+
+
+// // ==========================================
+// // LẦN BẤM THỨ 3: Vẫn lỗi tiếp
+// // ==========================================
+// retryCount = retryCount + 1; // Tăng lên thành 3
+// console.log(`Cảnh báo: Thất bại lần ${retryCount}. Đây là cơ hội cuối cùng!`); 
+// // Màn hình in: Thất bại lần 3.
+
+
+// // ==========================================
+// // HỆ THỐNG KIỂM TRA ĐỂ KHÓA NÚT SUBMIT
+// // ==========================================
+// // Lúc này retryCount đang là 3. Nếu hệ thống chạy tiếp lần nữa thì sẽ là lần thứ 4.
+// // Chúng ta kiểm tra xem số lần thử hiện tại đã đạt đến giới hạn chưa:
+
+// if (retryCount >= MAX_RETRIES) {
+//     console.log(`\n🚨 KẾT QUẢ: Số lần thử (${retryCount}) đã đạt giới hạn cho phép (${MAX_RETRIES}).`);
+//     console.log("👉 ĐÃ DISABLE (KHÓA) NÚT SUBMIT! Khách hàng không thể bấm được nữa.");
+    
+    // Trong thực tế, chỗ này bạn sẽ viết code để đổi màu nút thành màu xám và chặn click:
+    // submitButton.disabled = true;
+//}
+/////////////////////////////
+// BÀI TẬP: Tính giá vé sau khi áp dụng chương trình khuyến mãi (Promotion)
+// Rule (Luật): Nếu Khách hàng > 18 tuổi VÀ là thành viên VIP, thì được giảm 30% giá vé. Ngược lại, vẫn giữ nguyên giá gốc.
+
+// Dữ liệu thô ban đầu:
+// let rawAge = " 25 tuổi ";
+// let rawIsVIP = "true";
+// let rawTicketPrice = " 500.000 đ ";
+// Yêu cầu:
+// Làm sạch dữ liệu và ép về đúng kiểu dữ liệu (Số, Logic) để tính toán.
+// Kiểm tra điều kiện. Nếu đủ điều kiện thì tính giá sau giảm 30%. Nếu không thì giữ nguyên.
+// In kết quả ra màn hình.
+
+let rawAge = " 25 tuổi ";
+let rawTicketPrice = " 500.000 đ ";
+let rawIsVIP = "true";
+
+let Age = parseInt(rawAge);
+let isVip = rawIsVIP === "true";
+let cleanPrice = rawTicketPrice.trim().replaceAll(".","").replace("đ","");
+let ticketPrice = Number(cleanPrice);
+let finalPrice = ticketPrice; 
+if (Age > 18 && isVip) 
+    {
+        finalPrice = ticketPrice - ((ticketPrice/100)*30);
+        console.log("Chúc mừng! Bạn đủ điều kiện giảm giá 30%.");
+    }
+else {
+    console.log("Rất tiếc! Bạn không đủ điều kiện giảm giá.");}
+    console.log(`Số tiền khách phải trả: ${finalPrice.toLocaleString()} đ`);
