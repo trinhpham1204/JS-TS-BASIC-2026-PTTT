@@ -97,3 +97,6 @@ git log --oneline
 5901dad (HEAD -> main, origin/main) doc: update git lesson
 8280ccf first commit
 HEAD -> main là vị trí mọi người đang đứng
+
+git fetch: xem có sự thay đổi gì, lấy thông tin sự thay đổi so với code đang có
+git pull: lấy đoạn code đó về để local hay github đều như nhau
